@@ -11,5 +11,5 @@ app.listen(PORT, () => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('test4') // change this string to ensure a new version deployed
+  res.send('test2') // change this string to ensure a new version deployed
 })
