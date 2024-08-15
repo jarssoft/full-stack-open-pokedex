@@ -29,4 +29,9 @@ jobs:
       - name: commit messages contains skip
         env:
           COMMIT_MESSAGES: ${{ contains(join(github.event.commits.*.message), 'skip') }}
-        run: echo "$COMMIT_MESSAGES"        
+        run: echo "$COMMIT_MESSAGES"
+        name: if
+        env:
+          COMMIT_MESSAGES_CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message), 'skip') }}
+        if: ${{ $COMMIT_MESSAGES_CONTAINS_SKIP }}
+        run: echo "Skipataan"
