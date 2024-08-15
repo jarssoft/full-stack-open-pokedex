@@ -6,7 +6,7 @@ on:
     branches: [ main, master ]
     types: [opened, synchronize]
 jobs:
-  test:
+  testanddeploy:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,7 @@ jobs:
       if: ${{ github.event_name == 'push' }}
       run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
   tag_release:
-    needs: [test]
+    needs: [testanddeploy]
     runs-on: ubuntu-latest    
     steps:
     - uses: actions/checkout@v4
