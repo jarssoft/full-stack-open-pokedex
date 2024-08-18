@@ -33,8 +33,9 @@ jobs:
       - name: if
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }} 
         run: echo "Skipataan"
-      - name: Test Success
+      - name: Test discord
         uses: rjstone/discord-webhook-notify@v1
         with:
             severity: info
-            details: Test Succeeded!
+            details: Test discord!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
