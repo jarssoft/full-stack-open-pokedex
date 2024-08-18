@@ -25,10 +25,21 @@ jobs:
       with:
         name: playwright-report
         path: playwright-report/
-        retention-days: 30    
+        retention-days: 30
+      if: ${{ !cancelled() }}
+      uses: discord-actions/message@v2
+      with:
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        message: "Build failed"
     - name: Trigger deployment
       if: ${{ github.event_name == 'push' }}
       run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+    - name: New version succesfully deployed
+      if: success()
+      uses: discord-actions/message@v2
+      with:
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        message: "New version succesfully deployed"      
   tag_release:
     needs: [testanddeploy]
     runs-on: ubuntu-latest    
