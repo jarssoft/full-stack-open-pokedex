@@ -36,5 +36,5 @@ jobs:
       - name: Notify Discord
         uses: discord-actions/message@v2
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           message: "Hello, from Github t:Jari"
