@@ -26,6 +26,7 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Failed message
       if: ${{ !cancelled() }}
       uses: discord-actions/message@v2
       with:
@@ -34,7 +35,7 @@ jobs:
     - name: Trigger deployment
       if: ${{ github.event_name == 'push' }}
       run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-    - name: New version succesfully deployed
+    - name: Success message
       if: success()
       uses: discord-actions/message@v2
       with:
