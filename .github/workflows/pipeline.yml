@@ -18,7 +18,13 @@ jobs:
 
       - name: Check style
         run: npm run eslint
-      - name: Build app
-        run: npm run build
       - name: Make tests
         run: npm run test
+      - name: Build app
+        run: npm run build
+      - name: Failed message
+        if: ${{ cancelled() }}
+        uses: discord-actions/message@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          message: "Build failed -js"
