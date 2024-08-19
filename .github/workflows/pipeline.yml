@@ -23,7 +23,7 @@ jobs:
       - name: Build app
         run: npm run build
       - name: Failed message
-        if: ${{ cancelled() }}
+        if: ${{ failure() }}
         uses: discord-actions/message@v2
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
