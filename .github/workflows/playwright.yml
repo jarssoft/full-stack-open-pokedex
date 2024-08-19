@@ -27,7 +27,7 @@ jobs:
         path: playwright-report/
         retention-days: 30
     - name: Failed message
-      if: ${{ !cancelled() }}
+      if: ${{ cancelled() }}
       uses: discord-actions/message@v2
       with:
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
