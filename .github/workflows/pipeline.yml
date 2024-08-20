@@ -28,3 +28,9 @@ jobs:
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           message: "Build failed -js"
+      - name: Succes message
+        if: ${{ success() }}
+        uses: discord-actions/message@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          message: "Build success -js"          
