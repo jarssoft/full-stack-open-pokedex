@@ -27,7 +27,7 @@ jobs:
         uses: discord-actions/message@v2
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          message: "Build failed -js"
+          message: "Build failed for commit ${{ github.sha }} -js"
       - name: Succes message
         if: ${{ success() }}
         uses: discord-actions/message@v2
