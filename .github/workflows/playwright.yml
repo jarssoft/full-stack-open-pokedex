@@ -37,7 +37,7 @@ jobs:
         message: "Build failed"
     - name: Trigger deployment
       if: ${{ env.HAS_NEW_VERSION == 'true' }}
-      run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}  
+      run: curl https://api.render.com.fake/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}  
   tag_release:
     needs: [testanddeploy]
     runs-on: ubuntu-latest    
