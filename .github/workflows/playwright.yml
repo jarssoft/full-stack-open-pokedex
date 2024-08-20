@@ -9,6 +9,28 @@ on:
     branches: [ main, master ]
     types: [opened, synchronize]
 jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check style
+        run: npm run eslint
+      - name: Make tests
+        run: npm run test
+      - name: Build app
+        run: npm run build
+      - name: Failed message
+        if: ${{ failure() }}
+        uses: discord-actions/message@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          message: "Build failed for commit ${{ github.sha }} -js"
   testanddeploy:
     needs: [simple_deployment_pipeline]
     timeout-minutes: 60
