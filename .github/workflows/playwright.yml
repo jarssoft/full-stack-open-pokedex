@@ -56,7 +56,9 @@ jobs:
         DEFAULT_BUMP: patch
   successmessage:
     needs: [testanddeploy]
-    uses: discord-actions/message@v2
-    with:
-      webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      message: "New version deployed -js"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: discord-actions/message@v2
+      with:
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        message: "New version deployed -js"
