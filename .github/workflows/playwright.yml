@@ -1,4 +1,7 @@
 name: Playwright Tests
+env:
+  # the below will be 'true'
+  HAS_NEW_VERSION: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
 on:
   push:
     branches: [ main, master ]
@@ -33,7 +36,7 @@ jobs:
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         message: "Build failed"
     - name: Trigger deployment
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ env.HAS_NEW_VERSION == 'true' }}
       run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
   tag_release:
     needs: [testanddeploy]
@@ -46,7 +49,7 @@ jobs:
     - name: Install dependencies
       run: npm ci    
     - name: Bump version and push tag
-      if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
+      if: ${{ env.HAS_NEW_VERSION == 'true' }}
       uses: anothrNick/github-tag-action@1.64.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
