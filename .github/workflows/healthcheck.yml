@@ -1,9 +1,8 @@
 name: Testing stuff
 
 on:
-  push:
-    branches:
-      - side
+  schedule:
+    - cron: '15 * * * *'
 
 jobs:
   healthcheck:
