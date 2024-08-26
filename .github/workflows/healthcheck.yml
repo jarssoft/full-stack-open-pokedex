@@ -1,8 +1,8 @@
-name: Testing stuff
+name: Health check
 
 on:
   schedule:
-    - cron: '15 * * * *'
+    - cron: '7,17,27,37,47,57 * * * *'
 
 jobs:
   healthcheck:
