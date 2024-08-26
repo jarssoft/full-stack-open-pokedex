@@ -6,14 +6,14 @@ on:
       - side
 
 jobs:
-  a_test_job:
+  healthcheck:
     runs-on: ubuntu-20.04
     steps:
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v4
         with:
           # Check the following URLs one by one sequentially
-          url: https://full-stack-open-pokedex-wrmo.onrender.com/health/fake-error
+          url: https://full-stack-open-pokedex-wrmo.onrender.com/health
           # Follow redirects, or just report success on 3xx status codes
           follow-redirect: false # Optional, defaults to "false"
           # Fail this action after this many failed attempts
